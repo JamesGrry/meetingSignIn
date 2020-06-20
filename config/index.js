@@ -13,12 +13,7 @@ module.exports = {
     proxyTable: {//dev通过前端代理形式解决跨域问题，生产环境通过nginx代理
       '/api':
       {
-        // target: 'http://47.96.255.196:8080',
-        target: 'http://192.168.31.44:8080',
-        // target: 'http://192.168.1.112:8090',
-        // target: 'http://47.96.255.196:8080/',//媒资2.0测试环境
-        // target: 'http://47.102.123.154:8080',
-        //target:'http://116.196.65.165:8080',
+        target: 'http://47.96.255.196:8080',
         changeOrigin: true, //如果接口跨域，需要进行这个参数配置
         // pathRewrite: {'^/api' : ''} //后面可以使重写的新路径，一般不做更改
       }
