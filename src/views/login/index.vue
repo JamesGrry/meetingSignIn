@@ -1,6 +1,6 @@
 <template>
   <div
-    style="height:100%;width:100%;background:url('https://i.picsum.photos/id/1000/1920/1080.jpg')"
+    style="height:100%;width:100%;background:url('https://picsum.photos/1920/1080')"
   >
     <div class="login">
       <div class="login_main">
