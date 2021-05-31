@@ -1,6 +1,6 @@
 <template>
   <div id="footer" style="text-align: center; color: #999999; font-size: 14px">
-    <p>Copyright {{ dayYear }}詹伊栋.AllRightsReserved 联系方式：17316558378</p>
+    <p>Copyright @2020-{{ currentDateY }}詹伊栋.AllRightsReserved</p>
     <p>
       @www.grry.top Mr.Zhan
       <a style="color: #999999" href="http://beian.miit.gov.cn/" target="_blank"
@@ -14,7 +14,7 @@
 export default {
   data() {
     return {
-      dayYear: new Date().getFullYear()
+      currentDateY: new Date().getFullYear()
     };
   }
 };
