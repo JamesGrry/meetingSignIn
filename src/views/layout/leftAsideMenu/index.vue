@@ -50,86 +50,86 @@
   </div>
 </template>
 <script>
-import logoImg from "@/assets/images/logo.png";
+import logoImg from '@/assets/images/logo.png'
 export default {
-  data() {
+  data () {
     return {
       routerList: [],
       logoImg: logoImg
-    };
+    }
   },
-  mounted() {
+  mounted () {
     this.routerList = [
       {
-        path: "/",
-        name: "login",
-        routeName: "",
+        path: '/',
+        name: 'login',
+        routeName: '',
         isHide: true
       },
       {
-        path: "/login",
-        name: "login",
-        routeName: "",
+        path: '/login',
+        name: 'login',
+        routeName: '',
         isHide: true
       },
       {
-        path: "/index",
-        name: "index",
-        routeName: "首页",
-        Iconfont: "#icon-1"
+        path: '/index',
+        name: 'index',
+        routeName: '首页',
+        Iconfont: '#icon-1'
       },
       {
-        path: "/meetingManage",
-        name: "meetingManage",
-        routeName: "会议管理",
-        Iconfont: "#icon-2"
+        path: '/meetingManage',
+        name: 'meetingManage',
+        routeName: '会议管理',
+        Iconfont: '#icon-2'
       },
 
       {
-        path: "/signInList",
+        path: '/signInList',
         // name: "",
-        routeName: "签到管理",
-        Iconfont: "#icon-3",
+        routeName: '签到管理',
+        Iconfont: '#icon-3',
         children: [
           {
-            path: "/signInList",
-            name: "signInList",
-            routeName: "签到列表",
-            Iconfont: "#icon-3-1"
+            path: '/signInList',
+            name: 'signInList',
+            routeName: '签到列表',
+            Iconfont: '#icon-3-1'
           },
           {
-            path: "/signIn",
-            name: "signIn",
-            routeName: "会议签到",
-            Iconfont: "#icon-3-2",
-            component: resolve => require(["@/views/signIn"], resolve)
+            path: '/signIn',
+            name: 'signIn',
+            routeName: '会议签到',
+            Iconfont: '#icon-3-2',
+            component: resolve => require(['@/views/signIn'], resolve)
           }
         ]
       },
       {
-        path: "/membership",
-        name: "membership",
-        routeName: "收纳会费",
-        Iconfont: "#icon-4",
-        component: resolve => require(["@/views/membership"], resolve)
+        path: '/membership',
+        name: 'membership',
+        routeName: '收纳会费',
+        Iconfont: '#icon-4',
+        component: resolve => require(['@/views/membership'], resolve)
       },
       {
-        path: "/",
-        name: "",
-        routeName: "系统设置",
-        Iconfont: "#icon-5",
+        path: '/',
+        name: '',
+        routeName: '系统设置',
+        Iconfont: '#icon-5',
         children: [
           {
-            path: "/userManag",
-            name: "userManag",
-            routeName: "用户管理",
-            Iconfont: "#icon-5-1",
+            path: '/userManag',
+            name: 'userManag',
+            routeName: '用户管理',
+            Iconfont: '#icon-5-1',
             component: resolve =>
-              require(["@/views/system/userManage"], resolve)
+              require(['@/views/system/userManage'], resolve)
           }
         ]
       }
-    ];
+    ]
     // console.log(this.$router.options.routes);
     // for (var i in this.$router.options.routes) {
     //   this.routerList.push(this.$router.options.routes[i]);
@@ -142,13 +142,13 @@ export default {
     // }
   },
   methods: {
-    handlePathJump(val) {
-      if (this.$route.path != val.path) {
-        this.$router.push({ path: val.path });
+    handlePathJump (val) {
+      if (this.$route.path !== val.path) {
+        this.$router.push({ path: val.path })
       }
     }
   }
-};
+}
 </script>
 <style lang="sass" scoped>
 

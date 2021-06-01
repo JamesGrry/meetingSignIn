@@ -42,45 +42,45 @@
   </div>
 </template>
 <script>
-import { getArchivesList } from "@/api/login/login.js";
+import { getArchivesList } from '@/api/login/login.js'
 export default {
-  data() {
+  data () {
     return {
       loginData: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       }
-    };
+    }
   },
-  mounted() {
+  mounted () {
     // this.$store.dispatch("setUser", "ismyusr");
   },
   methods: {
     /**
      * 点击登录
      */
-    handleLogin() {
-      this.requestGetArchivesList(this.loginData);
+    handleLogin () {
+      this.requestGetArchivesList(this.loginData)
     },
     /**
      * 登录请求
      */
-    requestGetArchivesList(params) {
+    requestGetArchivesList (params) {
       getArchivesList(params).then(result => {
-        if (result.state == 200) {
-          this.$store.dispatch("setUser", result.data.username);
-          this.$router.push({ path: "index" });
+        if (result.state === 200) {
+          this.$store.dispatch('setUser', result.data.username)
+          this.$router.push({ path: 'index' })
           this.$message({
-            message: "登录成功！欢迎" + result.data.realName,
-            type: "success"
-          });
+            message: '登录成功！欢迎' + result.data.realName,
+            type: 'success'
+          })
         } else {
-          this.$message.error(result.message);
+          this.$message.error(result.message)
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 <style scoped>
 /*签到界面*/
@@ -319,4 +319,3 @@ h6 {
 
 /*login 结束*/
 </style>
-

@@ -93,140 +93,137 @@
 <script>
 import {
   getSignInList,
-  getMeetingList,
-  setSngnInEdit,
-  setSngnInDelete,
-  setSngnInSave
-} from "@/api/signInList/signInList.js";
+  getMeetingList
+} from '@/api/signInList/signInList.js'
 export default {
   data () {
     return {
       isChoiceMeeting: true,
-      state: "",
+      state: '',
       timeout: null,
       signInListData: {
-        meetingId: "",
+        meetingId: '',
         attended: 0,
         SignInTableList: [],
         meetingTablePage: {
           page: 0,
           size: 10,
           total: 0,
-          theme: ""
+          theme: ''
         }
       },
       dialogSignIn: {
         visible: false,
-        signInImg: ""
+        signInImg: ''
       },
       dialogMeetingSave: {
-        dialogTile: "",
+        dialogTile: '',
         dialogVisible: false,
         dialogFromData: {},
         dialogFromRules: {
           theme: [
-            { required: true, message: "请输入会议主题", trigger: "blur" },
-            { min: 3, message: "至少输入三个字符", trigger: "blur" }
+            { required: true, message: '请输入会议主题', trigger: 'blur' },
+            { min: 3, message: '至少输入三个字符', trigger: 'blur' }
           ],
           address: [
-            { required: true, message: "请输入会议地址", trigger: "blur" }
+            { required: true, message: '请输入会议地址', trigger: 'blur' }
           ],
           startTime: [
             {
-              type: "date",
+              type: 'date',
               required: true,
-              message: "请选择日期",
-              trigger: "change"
+              message: '请选择日期',
+              trigger: 'change'
             }
           ],
           endTime: [
             {
-              type: "date",
+              type: 'date',
               required: true,
-              message: "请选择日期",
-              trigger: "change"
+              message: '请选择日期',
+              trigger: 'change'
             }
           ],
-          host: [{ required: true, message: "请输入主讲人", trigger: "blur" }],
+          host: [{ required: true, message: '请输入主讲人', trigger: 'blur' }],
           hostIntroduce: [
-            { required: true, message: "请输入主讲人介绍", trigger: "blur" }
+            { required: true, message: '请输入主讲人介绍', trigger: 'blur' }
           ],
           sumNumber: [
-            { required: true, message: "请输入会议人数", trigger: "blur" }
+            { required: true, message: '请输入会议人数', trigger: 'blur' }
           ],
           contents: [
-            { required: true, message: "请输入会议介绍", trigger: "blur" },
-            { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+            { required: true, message: '请输入会议介绍', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
           payCode: [
-            { required: true, message: "请输入活动名称", trigger: "blur" },
-            { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ]
         }
       }
-    };
+    }
   },
   mounted () {
-    this.requestGetMeetingList();
-    this.requestGetSignInList(this.signInListData.meetingTablePage);
+    this.requestGetMeetingList()
+    this.requestGetSignInList(this.signInListData.meetingTablePage)
   },
   methods: {
     /**
      * 关闭签到按钮
      */
     handleChoice () {
-      this.isChoiceMeeting = true;
+      this.isChoiceMeeting = true
     },
     handleSignIn () {
-      this.dialogSignIn.visible = true;
+      this.dialogSignIn.visible = true
       this.dialogSignIn.signInImg =
-        "/api/createQrcode?meetid=" + this.signInListData.attended;
+        '/api/createQrcode?meetid=' + this.signInListData.attended
     },
     querySearchAsync (queryString, cb) {
-      var restaurants = this.signInListData.meetingSelectList;
+      var restaurants = this.signInListData.meetingSelectList
       var results = queryString
         ? restaurants.filter(this.createStateFilter(queryString))
-        : restaurants;
-      clearTimeout(this.timeout);
+        : restaurants
+      clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
-        cb(results);
-      }, 1000 * Math.random());
+        cb(results)
+      }, 1000 * Math.random())
     },
     createStateFilter (queryString) {
       return state => {
-        console.log(state);
+        console.log(state)
         return (
           state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-        );
-      };
+        )
+      }
     },
     handleSelect (item) {
       var params = {
         attended: item.id
-      };
-      this.signInListData.attended = item.id;
-      this.isChoiceMeeting = false;
-      this.requestGetSignInList(params);
+      }
+      this.signInListData.attended = item.id
+      this.isChoiceMeeting = false
+      this.requestGetSignInList(params)
     },
     /**
      * 搜索按钮
      */
     handleSearchMeeting () {
-      this.requestGetSignInList(this.signInListData.meetingTablePage);
+      this.requestGetSignInList(this.signInListData.meetingTablePage)
     },
     /**
      * 分页改变size
      */
     handleSizeChange (val) {
-      this.signInListData.meetingTablePage.size = val;
-      this.requestGetSignInList(this.signInListData.meetingTablePage);
+      this.signInListData.meetingTablePage.size = val
+      this.requestGetSignInList(this.signInListData.meetingTablePage)
     },
     /**
      * 分页改变page
      */
     handleCurrentChange (val) {
-      this.signInListData.meetingTablePage.page = val - 1;
-      this.requestGetSignInList(this.signInListData.meetingTablePage);
+      this.signInListData.meetingTablePage.page = val - 1
+      this.requestGetSignInList(this.signInListData.meetingTablePage)
     },
     /**
      * 保存会议
@@ -236,10 +233,10 @@ export default {
      * 删除会议
      */
     handleDeleteMeeting (row) {
-      this.$confirm("该操作为删除会议, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      this.$confirm('该操作为删除会议, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
           // this.$message({
@@ -252,44 +249,44 @@ export default {
           //   type: 'info',
           //   message: '已取消删除'
           // });
-        });
+        })
     },
     /**
      * 编辑会议
      */
     handleEditMeeting (row) {
-      console.log(row);
-      this.dialogMeetingSave.dialogTile = "编辑会议";
-      this.dialogMeetingSave.dialogVisible = true;
-      this.dialogMeetingSave.dialogFromData = JSON.parse(JSON.stringify(row));
+      console.log(row)
+      this.dialogMeetingSave.dialogTile = '编辑会议'
+      this.dialogMeetingSave.dialogVisible = true
+      this.dialogMeetingSave.dialogFromData = JSON.parse(JSON.stringify(row))
     },
     /**
      * 请求会议列表
      */
     requestGetMeetingList (params) {
       getMeetingList(params).then(result => {
-        this.signInListData.meetingSelectList = [];
+        this.signInListData.meetingSelectList = []
         for (var i in result.content) {
           this.signInListData.meetingSelectList.push({
             value: result.content[i].theme,
             id: result.content[i].id
-          });
+          })
         }
-      });
+      })
     },
     /**
      * 获取签到列表
      */
     requestGetSignInList (params) {
       getSignInList(params).then(result => {
-        this.signInListData.SignInTableList = result.content;
-        this.signInListData.meetingTablePage.page = result.page;
-        this.signInListData.meetingTablePage.size = result.size;
-        this.signInListData.meetingTablePage.total = result.total;
-      });
+        this.signInListData.SignInTableList = result.content
+        this.signInListData.meetingTablePage.page = result.page
+        this.signInListData.meetingTablePage.size = result.size
+        this.signInListData.meetingTablePage.total = result.total
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 #signInList {

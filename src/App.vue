@@ -1,33 +1,33 @@
 <template>
-  <div id="app">
-    <!-- <img src="./assets/logo.png" /> -->
+  <div id='app'>
+    <!-- <img src='./assets/logo.png' /> -->
     <!-- <router-view /> -->
-    <main-page v-if="loginUserId"></main-page>
+    <main-page v-if='loginUserId'></main-page>
     <login-page v-else></login-page>
   </div>
 </template>
 
 <script>
-import mainPage from "@/views/layout";
-import loginPage from "@/views/login";
+import mainPage from '@/views/layout'
+import loginPage from '@/views/login'
 export default {
-  name: "App",
+  name: 'App',
   components: { mainPage, loginPage },
-  data() {
-    return {};
+  data () {
+    return {}
   },
   computed: {
-    loginUserId() {
+    loginUserId () {
       console.log(this.$store.getters.getUserInfo)
-      return this.$store.getters.getUserInfo;
+      return this.$store.getters.getUserInfo
     }
   }
-};
+}
 </script>
 
-<style lang="css">
+<style lang='css'>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
@@ -54,26 +54,26 @@ export default {
 }
 
 /*修改滚动条样式*/
-div::-webkit-scrollbar{
-  width:6px;
-  height:10px;
+div::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
   /**/
 }
-div::-webkit-scrollbar-track{
+div::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.699);
-  border-radius:2px;
+  border-radius: 2px;
 }
-div::-webkit-scrollbar-thumb{
+div::-webkit-scrollbar-thumb {
   background: #bfbfbfb7;
-  border-radius:10px;
+  border-radius: 10px;
 }
-div::-webkit-scrollbar-thumb:hover{
+div::-webkit-scrollbar-thumb:hover {
   background: #333;
 }
-div::-webkit-scrollbar-corner{
+div::-webkit-scrollbar-corner {
   background: #ffffff;
 }
 </style>
-<style lang="scss">
-@import "@/assets/css/public.scss";
+<style lang='scss'>
+@import '@/assets/css/public.scss';
 </style>
