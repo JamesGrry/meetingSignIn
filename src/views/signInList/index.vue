@@ -3,22 +3,8 @@
   <div id="signInList">
     <div class="searchBox">
       <div>
-        <el-autocomplete
-          v-model="signInListData.meetingId"
-          :fetch-suggestions="querySearchAsync"
-          placeholder="选择会议"
-          @select="handleSelect"
-          @input="handleChoice"
-          size="small"
-        ></el-autocomplete>
-        <el-button
-          type="primary"
-          size="small"
-          :disabled="isChoiceMeeting"
-          @click="handleSignIn"
-          icon="el-icon-search"
-          title="请先选择会议"
-        >签到</el-button>
+        <el-autocomplete v-model="signInListData.meetingId" :fetch-suggestions="querySearchAsync" placeholder="选择会议" @select="handleSelect" @input="handleChoice" size="small"></el-autocomplete>
+        <el-button type="primary" size="small" :disabled="isChoiceMeeting" @click="handleSignIn" icon="el-icon-search" title="请先选择会议">签到</el-button>
       </div>
       <!-- <el-button type="primary" size="small" icon="el-icon-edit">添加会议</el-button> -->
     </div>
@@ -41,31 +27,12 @@
           </template>
         </el-table-column>-->
       </el-table>
-      <el-pagination
-        class="tablePagin"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="signInListData.meetingTablePage.page"
-        :page-sizes="[10, 15, 25, 50]"
-        :page-size="signInListData.meetingTablePage.size"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="signInListData.meetingTablePage.total"
-      ></el-pagination>
+      <el-pagination class="tablePagin" @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="signInListData.meetingTablePage.page" :page-sizes="[10, 15, 25, 50]" :page-size="signInListData.meetingTablePage.size" layout="total, sizes, prev, pager, next, jumper" :total="signInListData.meetingTablePage.total"></el-pagination>
     </div>
     <div class="dialogBox">
-      <el-dialog
-        :title="dialogMeetingSave.dialogTile"
-        :visible.sync="dialogMeetingSave.dialogVisible"
-        width="600px"
-      >
+      <el-dialog :title="dialogMeetingSave.dialogTile" :visible.sync="dialogMeetingSave.dialogVisible" width="600px">
         <div>
-          <el-form
-            :model="dialogMeetingSave.dialogFromData"
-            :rules="dialogMeetingSave.dialogFromRules"
-            ref="ruleForm"
-            label-width="100px"
-            class="demo-ruleForm"
-          >
+          <el-form :model="dialogMeetingSave.dialogFromData" :rules="dialogMeetingSave.dialogFromRules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="会议主题" prop="theme">
               <el-input v-model="dialogMeetingSave.dialogFromData.theme"></el-input>
             </el-form-item>
@@ -80,23 +47,13 @@
               <el-col :span="11">
                 <el-form-item prop="startTime">
                   <!-- <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"></el-date-picker> -->
-                  <el-date-picker
-                    type="datetime"
-                    placeholder="会议开始时间"
-                    v-model="dialogMeetingSave.dialogFromData.startTime"
-                    style="width: 100%;"
-                  ></el-date-picker>
+                  <el-date-picker type="datetime" placeholder="会议开始时间" v-model="dialogMeetingSave.dialogFromData.startTime" style="width: 100%;"></el-date-picker>
                 </el-form-item>
               </el-col>
               <el-col class="line" :span="2">-</el-col>
               <el-col :span="11">
                 <el-form-item prop="endTime">
-                  <el-date-picker
-                    type="datetime"
-                    placeholder="会议结束时间"
-                    v-model="dialogMeetingSave.dialogFromData.endTime"
-                    style="width: 100%;"
-                  ></el-date-picker>
+                  <el-date-picker type="datetime" placeholder="会议结束时间" v-model="dialogMeetingSave.dialogFromData.endTime" style="width: 100%;"></el-date-picker>
                 </el-form-item>
               </el-col>
             </el-form-item>
@@ -107,21 +64,13 @@
               <el-input v-model="dialogMeetingSave.dialogFromData.host"></el-input>
             </el-form-item>
             <el-form-item label="主讲人介绍" prop="hostIntroduce">
-              <el-input
-                type="textarea"
-                :autosize="{ minRows: 2, maxRows: 4}"
-                v-model="dialogMeetingSave.dialogFromData.hostIntroduce"
-              ></el-input>
+              <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="dialogMeetingSave.dialogFromData.hostIntroduce"></el-input>
             </el-form-item>
             <el-form-item label="会议人数" prop="desc">
               <el-input v-model.number="dialogMeetingSave.dialogFromData.sumNumber"></el-input>
             </el-form-item>
             <el-form-item label="会议介绍" prop="desc">
-              <el-input
-                type="textarea"
-                :autosize="{ minRows: 2, maxRows: 4}"
-                v-model="dialogMeetingSave.dialogFromData.contents"
-              ></el-input>
+              <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="dialogMeetingSave.dialogFromData.contents"></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -150,7 +99,7 @@ import {
   setSngnInSave
 } from "@/api/signInList/signInList.js";
 export default {
-  data() {
+  data () {
     return {
       isChoiceMeeting: true,
       state: "",
@@ -217,7 +166,7 @@ export default {
       }
     };
   },
-  mounted() {
+  mounted () {
     this.requestGetMeetingList();
     this.requestGetSignInList(this.signInListData.meetingTablePage);
   },
@@ -225,15 +174,15 @@ export default {
     /**
      * 关闭签到按钮
      */
-    handleChoice() {
+    handleChoice () {
       this.isChoiceMeeting = true;
     },
-    handleSignIn() {
+    handleSignIn () {
       this.dialogSignIn.visible = true;
       this.dialogSignIn.signInImg =
         "/api/createQrcode?meetid=" + this.signInListData.attended;
     },
-    querySearchAsync(queryString, cb) {
+    querySearchAsync (queryString, cb) {
       var restaurants = this.signInListData.meetingSelectList;
       var results = queryString
         ? restaurants.filter(this.createStateFilter(queryString))
@@ -243,7 +192,7 @@ export default {
         cb(results);
       }, 1000 * Math.random());
     },
-    createStateFilter(queryString) {
+    createStateFilter (queryString) {
       return state => {
         console.log(state);
         return (
@@ -251,7 +200,7 @@ export default {
         );
       };
     },
-    handleSelect(item) {
+    handleSelect (item) {
       var params = {
         attended: item.id
       };
@@ -262,31 +211,31 @@ export default {
     /**
      * 搜索按钮
      */
-    handleSearchMeeting() {
+    handleSearchMeeting () {
       this.requestGetSignInList(this.signInListData.meetingTablePage);
     },
     /**
      * 分页改变size
      */
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       this.signInListData.meetingTablePage.size = val;
       this.requestGetSignInList(this.signInListData.meetingTablePage);
     },
     /**
      * 分页改变page
      */
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.signInListData.meetingTablePage.page = val - 1;
       this.requestGetSignInList(this.signInListData.meetingTablePage);
     },
     /**
      * 保存会议
      */
-    handleSaveMeeting() {},
+    handleSaveMeeting () { },
     /**
      * 删除会议
      */
-    handleDeleteMeeting(row) {
+    handleDeleteMeeting (row) {
       this.$confirm("该操作为删除会议, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -308,7 +257,7 @@ export default {
     /**
      * 编辑会议
      */
-    handleEditMeeting(row) {
+    handleEditMeeting (row) {
       console.log(row);
       this.dialogMeetingSave.dialogTile = "编辑会议";
       this.dialogMeetingSave.dialogVisible = true;
@@ -317,7 +266,7 @@ export default {
     /**
      * 请求会议列表
      */
-    requestGetMeetingList(params) {
+    requestGetMeetingList (params) {
       getMeetingList(params).then(result => {
         this.signInListData.meetingSelectList = [];
         for (var i in result.content) {
@@ -331,7 +280,7 @@ export default {
     /**
      * 获取签到列表
      */
-    requestGetSignInList(params) {
+    requestGetSignInList (params) {
       getSignInList(params).then(result => {
         this.signInListData.SignInTableList = result.content;
         this.signInListData.meetingTablePage.page = result.page;
