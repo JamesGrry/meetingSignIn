@@ -74,6 +74,7 @@ export default {
             message: '登录成功2！欢迎' + result.data.realName,
             type: 'success'
           })
+          console.log(2)
         } else {
           this.$message.error(result.message)
         }
