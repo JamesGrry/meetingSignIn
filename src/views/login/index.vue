@@ -71,7 +71,7 @@ export default {
           this.$store.dispatch('setUser', result.data.username)
           this.$router.push({ path: 'index' })
           this.$message({
-            message: '登录成功2！欢迎' + result.data.realName,
+            message: '登录成功1！欢迎' + result.data.realName,
             type: 'success'
           })
           console.log(2)
